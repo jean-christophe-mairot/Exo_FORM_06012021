@@ -81,7 +81,7 @@ if(!empty($_POST) && !empty($_FILES)){
         if(!preg_match("/^[a-zA-Z-']*$/",$lastName)){
             echo 'le nom de doit contenir que des lettre majuscule ou minuscule';
         }
-        
+
     $mailAdresse=strip_tags(trim($_POST['mailAdresse']));
     $mdp=sha1(trim($_POST['mdp']));
 
@@ -111,3 +111,4 @@ if(!empty($_POST) && !empty($_FILES)){
     <!-- <input type="file" name="avatar"> <br>-->
     <input type="submit" value="enregistrer" name="submit">
 </form>
+
