@@ -17,7 +17,9 @@ if(!empty($_POST) && !empty($_FILES)){
     echo '</pre>';
 
   
-    define('MAX_SIZE', 500000);    // Taille max en octets du fichier
+    define('MAX_SIZE', 500000);    // Taille max en octets du fichie
+
+    //pour le changement de taille à voir plus tard
     define('WIDTH_MAX', 1920);    // Largeur max de l'image en pixels
     define('HEIGHT_MAX', 1920);    // Hauteur max de l'image en pixels
 
@@ -27,7 +29,7 @@ if(!empty($_POST) && !empty($_FILES)){
 
 
     // *********************************** FILE IMAGE ***********************************************************
-    // if (!empty($_FILES)){
+ 
 
         //recu le nom du fichier
         $file_name = $_FILES['fichier']['name'];
@@ -64,14 +66,22 @@ if(!empty($_POST) && !empty($_FILES)){
         }else{
             echo 'seuls les images avec les extensions jpeg, jpg, png, gif, webp sont autorisées';
         }
-    // }
+    
     
 
 
     // ********************************************************************************************************* 
 
     $firstName=strip_tags(trim($_POST['firstName']));
+        if(!preg_match("/^[a-zA-Z-']*$/",$firstName)){
+            echo 'le prenom de doit contenir que des lettre majuscule ou minuscule';
+        }
+
     $lastName=strip_tags(trim($_POST['lastName']));
+        if(!preg_match("/^[a-zA-Z-']*$/",$lastName)){
+            echo 'le nom de doit contenir que des lettre majuscule ou minuscule';
+        }
+        
     $mailAdresse=strip_tags(trim($_POST['mailAdresse']));
     $mdp=sha1(trim($_POST['mdp']));
 
