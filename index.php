@@ -1,5 +1,10 @@
 <?php
+// $serv=$_SERVER;
+// echo'<pre>';
+// var_dump($serv);
+// echo'</pre>';
 
+//lien à la base de données
 try {
     $pdo =new PDO("mysql:host=localhost;dbname=exo_06012021",'root','');
 
@@ -9,23 +14,12 @@ try {
 
 
  
-
+//condition du post et files
 if(!empty($_POST) && !empty($_FILES)){
 
-    // echo '<pre>';
-    // var_dump($_FILES);
-    // echo '</pre>';
 
-  
-    define('MAX_SIZE', 500000);    // Taille max en octets du fichie
-
-    //pour le changement de taille à voir plus tard
-    define('WIDTH_MAX', 1920);    // Largeur max de l'image en pixels
-    define('HEIGHT_MAX', 1920);    // Hauteur max de l'image en pixels
-
-    
-    //message erreur
-
+  // constante : Taille max en octets du fichie
+    define('MAX_SIZE', 500000);    
 
 
     // *********************************** FILE IMAGE ***********************************************************
@@ -47,30 +41,7 @@ if(!empty($_POST) && !empty($_FILES)){
         //tableau des extension autorisé lors de l'upload
         $extension_autorisee = array('.jpeg','.jpg','.png','.gif','.webp');
 
-        // // est-ce que fait parti du tableau ci dessus
-        // if (in_array($file_extension, $extension_autorisee)){
-        // // pour un autre if pour la taille ou dimension
-        //     if((filesize($_FILES['fichier']['tmp_name']) <= MAX_SIZE)){
-
-        //         //pour déplacer du temp vers la destination
-        //         if(move_uploaded_file($file_tmp_name, $file_dest)){
-
-        //             echo 'Fichier envoyé avec succés';
-
-        //         }else{
-        //             echo"Une erreur est survenue lors de l'envoi du fichier";
-        //         }
-        //     }else{
-        //         echo 'Erreur dans le poids !';
-        //     }
-        // }else{
-        //     echo 'seuls les images avec les extensions jpeg, jpg, png, gif, webp sont autorisées';
-        // }
-    
-    
-
-
-    // ********************************************************************************************************* 
+     // **************************************************************************************************** 
 
     $firstName=strip_tags(trim($_POST['firstName']));
     $lastName=strip_tags(trim($_POST['lastName']));
@@ -111,7 +82,7 @@ if(!empty($_POST) && !empty($_FILES)){
                     $request=$pdo->prepare("INSERT INTO user(firstName,lastName,mailAdresse,mdp,fichier) VALUES (?,?,?,?,?)");
                     $request->execute(array($firstName, $lastName, $mailAdresse, $mdp,$file_dest)); 
                     
-                    echo 'et User enregistré';
+                    echo ' et User enregistré';
 
                 }else{
                     echo"l'adresse mail n'est pas valide";
@@ -122,19 +93,7 @@ if(!empty($_POST) && !empty($_FILES)){
         }else{
             echo 'le prenom ne doit contenir que des lettres majuscule ou minuscule';
         }
-
-   
-        
-
     
-
-    //$name = test_input($_POST["name"]);
-    // if (!preg_match("/^[a-zA-Z-']*$/",$name)) {
-    //   $nameErr = "Only letters and white space allowed";
-    // } 
-
-    // $request=$pdo->prepare("INSERT INTO user(firstName,lastName,mailAdresse,mdp,fichier) VALUES (?,?,?,?,?)");
-    // $request->execute(array($firstName, $lastName, $mailAdresse, $mdp,$file_dest));     
 }
 
 
