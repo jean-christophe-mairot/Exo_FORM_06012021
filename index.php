@@ -4,26 +4,32 @@
 // var_dump($serv);
 // echo'</pre>';
 
-//lien à la base de données
-try {
-    $pdo =new PDO("mysql:host=localhost;dbname=exo_06012021",'root','');
+//lien à la base de données = getPdo
+// try {
+//     $pdo =new PDO("mysql:host=localhost;dbname=exo_06012021",'root','');
 
-}catch(PDOException $e){
-    die('Erreur: '.$e->getMessage());
-}
-
+// }catch(PDOException $e){
+//     die('Erreur: '.$e->getMessage());
+// }
+$pdo = getPdo();
 
  
 //condition du post et files
-if(!empty($_POST) && !empty($_FILES)){
+if(!empty($_POST) &&  !empty($_FILES)){
 
 
   // constante : Taille max en octets du fichie
     define('MAX_SIZE', 500000);    
-
+//$maxSize = '500000';
 
     // *********************************** FILE IMAGE ***********************************************************
- 
+ echo '<pre>';
+ var_dump($_FILES);
+ echo '</pre>';
+
+echo '<pre>';
+var_dump($_FILES);
+echo '</pre>';
 
         //recu le nom du fichier
         $file_name = $_FILES['fichier']['name'];
@@ -53,7 +59,8 @@ if(!empty($_POST) && !empty($_FILES)){
         if(preg_match("/^[a-zA-Z-']*$/",$firstName)){
             if(preg_match("/^[a-zA-Z-']*$/",$lastName)){
                 if (preg_match("/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/",$mailAdresse)) {
-
+                    //
+                    // if(filter_var($email, FILTER_VALIDATE_EMAIL)) remplace la regex pour l'adresse mail
                     // *********************** import img *********************
 
                                 // est-ce que fait parti du tableau ci dessus
